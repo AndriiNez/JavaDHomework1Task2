@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group = 'ua.homework'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
+
+}
+jar {
+    manifest {
+        attributes "Main-Class": "ua.homework.Test"
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
